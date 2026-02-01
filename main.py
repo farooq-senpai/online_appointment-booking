@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///appointment_system.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize Extensions
-db = SQLAlchemy(app)
+db = SQLAlchemy(main)
 
 # ------------------------------
 # DATABASE MODELS
