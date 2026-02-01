@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Appointment System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}">Home</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="auth-wrapper" style="border-top: 4px solid var(--accent-color);"> <!-- Custom touch for admin -->
+            <h1>Admin Portal</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="flash-messages {{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('admin_login') }}">
+                <div class="form-group">
+                    <label for="email">Admin Email</label>
+                    <input type="email" id="email" name="email" required placeholder="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Admin Password">
+                </div>
+                <button type="submit" style="background: linear-gradient(135deg, var(--accent-color), #2c3e50);">Login
+                    as Admin</button>
+            </form>
+
+            <a href="{{ url_for('login') }}" class="link-center">Back to User Login</a>
+        </div>
+    </div>
+</body>
+
+</html>

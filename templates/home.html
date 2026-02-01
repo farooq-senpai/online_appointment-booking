@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Appointment Booking System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="active">Home</a>
+            {% if g.user %}
+            <a
+                href="{{ url_for('user_dashboard') if g.user.role == 'user' else url_for('admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('admin_login') }}" style="font-size: 0.9em; opacity: 0.7;">Admin</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1>Smart Online Appointment<br>Booking System</h1>
+            <p class="subtext">Experience a seamless, secure, and efficient way to book your appointments. No waiting
+                lines, just instant scheduling.</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('book_appointment') if g.user else url_for('login') }}" class="btn-hero btn">Book
+                    Appointment</a>
+                {% if not g.user %}
+                <a href="{{ url_for('register') }}" class="btn-hero secondary">Create Account</a>
+                {% endif %}
+            </div>
+            {% if not g.user %}
+            <div style="margin-top: 30px; font-size: 0.9rem;">
+                <span style="color: var(--text-muted);">Staff Access: </span>
+                <a href="{{ url_for('admin_login') }}"
+                    style="color: var(--primary-color); text-decoration: none; margin: 0 5px;">Admin Login</a>
+                <span style="color: var(--border-color);">|</span>
+                <a href="{{ url_for('admin_register') }}"
+                    style="color: var(--text-muted); text-decoration: none; margin: 0 5px; font-size: 0.85em;">Admin
+                    Register</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- How It Works -->
+    <section class="padding-section how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Simple 3-step process to get your appointment sorted.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Register / Login</h3>
+                <p>Create a secure account or log in to access the booking features.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Book Slot</h3>
+                <p>Choose your preferred date, time, and reason for the appointment.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Get Approved</h3>
+                <p>Admin reviews your request and you get a real-time status update.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="padding-section features-section">
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>Built for reliability, security, and ease of use.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Secure Authentication</h3>
+                <p>Advanced security with encrypted passwords and session management keeps your data safe.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Instant Booking</h3>
+                <p>User-friendly interface allowing you to book appointments in seconds.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Admin Control</h3>
+                <p>Efficient command center for admins to manage and review all appointments.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Real-Time Tracking</h3>
+                <p>Track the status of your appointment from Pending to Approved instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to get started?</h2>
+        <p>Join us today and streamline your scheduling experience.</p>
+        <a href="{{ url_for('register') }}" class="btn-cta">Get Started Now</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Smart Appointment System. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

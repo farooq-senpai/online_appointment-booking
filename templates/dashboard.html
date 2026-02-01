@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Appointment System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('book_appointment') }}">Book Appointment</a>
+            <a href="{{ url_for('my_appointments') }}">My Appointments</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1>Welcome, {{ user.name }}!</h1>
+            <p>What would you like to do today?</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Book Appointment</h3>
+                <p>Schedule a new visit with us easily.</p>
+                <a href="{{ url_for('book_appointment') }}" class="btn">Book Now</a>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>My Appointments</h3>
+                <p>View history and status of your bookings.</p>
+                <a href="{{ url_for('my_appointments') }}" class="btn"
+                    style="background: linear-gradient(135deg, var(--accent-color), #4a5568);">View History</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

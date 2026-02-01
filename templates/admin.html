@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Appointment System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('admin_dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p style="text-align: center; margin-bottom: 30px;">Manage system appointments.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-messages {{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- Pending Appointments Section -->
+        <h2
+            style="color: var(--status-pending); margin-top: 40px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">
+            Pending Appointments</h2>
+        {% if pending_appointments %}
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in pending_appointments %}
+                    <tr style="background-color: #fffaf0;">
+                        <td>#{{ appointment.id }}</td>
+                        <td>
+                            <strong>{{ appointment.user.name }}</strong><br>
+                            <span style="font-size: 0.85em; color: var(--text-muted);">{{ appointment.user.email
+                                }}</span>
+                        </td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>{{ appointment.reason }}</td>
+                        <td>
+                            <a href="{{ url_for('approve_appointment', id=appointment.id) }}"
+                                class="btn-small btn-approve">Approve</a>
+                            <a href="{{ url_for('reject_appointment', id=appointment.id) }}"
+                                class="btn-small btn-reject"
+                                onclick="return confirm('Reject this appointment?')">Reject</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">No pending appointments.</p>
+        {% endif %}
+
+        <!-- All Appointments History -->
+        <h2
+            style="color: var(--accent-color); margin-top: 50px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">
+            Appointment History</h2>
+        {% if all_appointments %}
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in all_appointments %}
+                    <tr>
+                        <td>#{{ appointment.id }}</td>
+                        <td>{{ appointment.user.name }}</td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>
+                            <span class="status-{{ appointment.status }}">{{ appointment.status }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p style="text-align: center;">No appointments found.</p>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,703 @@
+/* 
+ * Modern & Classy Appointment System UI 
+ * CSS-Only Implementation 
+ */
+
+:root {
+    /* Color Palette */
+    --primary-color: #4b6cb7;
+    /* Deep Blue / Indigo */
+    --primary-dark: #3a539b;
+    /* Darker shade */
+    --accent-color: #182848;
+    /* Dark Accent */
+    --secondary-accent: #00d2ff;
+    /* Soft Teal/Cyan for highlights */
+
+    --bg-color: #f7f9fc;
+    /* Light Grey/Off-White Background */
+    --card-bg: #ffffff;
+    /* White Card Background */
+    --text-main: #2d3748;
+    /* Dark Charcoal */
+    --text-muted: #718096;
+    /* Muted Text */
+    --border-color: #e2e8f0;
+    /* Light Border */
+
+    /* Status Colors */
+    --status-pending: #f6ad55;
+    /* Soft Orange */
+    --status-approved: #48bb78;
+    /* Green */
+    --status-rejected: #f56565;
+    /* Red */
+
+    /* Typography */
+    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Effects */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-stack);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: transparent;
+    /* Changed from white to transparent to separate cards */
+    padding: 0;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Card Wrapper (Add this class to HTML elements you want card-styled) */
+.card-wrapper,
+.auth-wrapper {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.auth-wrapper {
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-accent));
+}
+
+.card-wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Navigation */
+nav {
+    background: var(--card-bg);
+    padding: 15px 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: slideInDown 0.5s ease-out;
+}
+
+nav .nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+}
+
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: var(--transition);
+    opacity: 0.8;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--primary-color);
+    background-color: rgba(75, 108, 183, 0.08);
+    /* slight primary tint */
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* Typography */
+h1 {
+    font-size: 2.2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+p {
+    color: var(--text-muted);
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /* Slightly smoother */
+    font-size: 1rem;
+    color: var(--text-main);
+    transition: var(--transition);
+    background-color: #fcfcfc;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+    background-color: #fff;
+}
+
+/* Buttons */
+button,
+.btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(75, 108, 183, 0.3);
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    /* Fix for anchor buttons width */
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 7px 14px rgba(75, 108, 183, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+}
+
+button:active,
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Tables */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    /* Wrapper handles spacing */
+    white-space: nowrap;
+}
+
+th {
+    background-color: #f8fafc;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+tr:hover td {
+    background-color: #f0f4f8;
+    /* Soft highlight on hover */
+    transition: background-color 0.2s ease;
+}
+
+/* Status Badges */
+span[class^="status-"] {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-Pending {
+    background-color: rgba(246, 173, 85, 0.15);
+    color: #dd6b20;
+    /* Darker orange for text */
+}
+
+.status-Approved {
+    background-color: rgba(72, 187, 120, 0.15);
+    color: #2f855a;
+    /* Darker green */
+}
+
+.status-Rejected {
+    background-color: rgba(245, 101, 101, 0.15);
+    color: #c53030;
+    /* Darker red */
+}
+
+/* Alerts */
+.flash-messages {
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.4s ease-out;
+}
+
+.success {
+    background-color: #c6f6d5;
+    color: #22543d;
+    border-left: 5px solid #48bb78;
+}
+
+.error,
+.warning {
+    background-color: #fed7d7;
+    color: #822727;
+    border-left: 5px solid #f56565;
+}
+
+.info {
+    background-color: #bee3f8;
+    color: #2c5282;
+    border-left: 5px solid #4299e1;
+}
+
+/* Links */
+.link-center {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.link-center:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Action Buttons (Table) */
+.btn-small {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    width: auto;
+    display: inline-block;
+    margin-right: 8px;
+    margin-top: 0;
+    border-radius: 6px;
+    box-shadow: none;
+    /* Flatter for tables */
+}
+
+.btn-approve {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+}
+
+.btn-reject,
+.btn-cancel {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+}
+
+.btn-small:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.dashboard-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--secondary-accent);
+}
+
+.dashboard-card h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.dashboard-card p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    nav .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 0;
+        /* Remove padding for mobile */
+    }
+
+    .card-wrapper,
+    .auth-wrapper {
+        padding: 25px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* =========================================
+   LANDING PAGE STYLES (Added for Upgrade)
+   ========================================= */
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 100px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--bg-color) 0%, #eef2f7 100%);
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content .subtext {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-hero {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    /* Pillow shape for hero buttons */
+    margin: 0;
+    width: auto;
+}
+
+.btn-hero.secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: none;
+}
+
+.btn-hero.secondary:hover {
+    background: rgba(75, 108, 183, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Section Common */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 2.2rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.padding-section {
+    padding: 80px 20px;
+}
+
+/* How It Works */
+.how-it-works {
+    background-color: #fff;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.step-card {
+    background: var(--bg-color);
+    padding: 40px 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin: 0 auto 20px;
+    font-size: 1.2rem;
+}
+
+/* Features Section */
+.features-section {
+    background-color: var(--bg-color);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.feature-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* Call To Action */
+.cta-section {
+    background: linear-gradient(135deg, var(--accent-color), #2c3e50);
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.cta-section h2 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+.btn-cta {
+    background: var(--secondary-accent);
+    color: var(--accent-color);
+    font-weight: 800;
+    padding: 18px 50px;
+    border-radius: 50px;
+    width: auto;
+    display: inline-block;
+    margin: 0;
+}
+
+.btn-cta:hover {
+    background: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+}
+
+/* Why Choose Us Split */
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+}
+
+.benefits-list li {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 35px;
+    font-size: 1.1rem;
+}
+
+.benefits-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--status-approved);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Footer (Simple) */
+footer {
+    text-align: center;
+    padding: 40px;
+    background: var(--accent-color);
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: auto;
+}
